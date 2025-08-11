@@ -62,19 +62,49 @@ const Map = () => {
     },
   ];
 
+  const products = [
+    {
+      id: 1,
+      name: "Phone",
+      price: "$699",
+    },
+    {
+      id: 2,
+      name: "Samsung",
+      price: "$1200",
+    },
+    {
+      id: 3,
+      name: "Laptop",
+      price: "$2000",
+    },
+  ];
+
   return (
-    <ul>
-      {dummyData.map((item, index) => {
-        //map method performs call back function for each element in here...,here we also provide index to specify each element
-        return (
-          <div key={index}>
-            <li> Name : {item.name}</li>
-            <li>Description : {item.description}</li>
-            <li>Price: {item.price}</li>
-          </div>
-        );
-      })}
-    </ul>
+    <div>
+      <ul>
+        {dummyData.map((item, index) => {
+          //map method performs call back function for each element in here...,here we also provide index to specify each element
+          return (
+            <div key={index}>
+              <li> Name : {item.name}</li>
+              <li>Description : {item.description}</li>
+              <li>Price: {item.price}</li>
+            </div>
+          );
+        })}
+      </ul>
+      <ul>
+        {products.map((item, index) => {
+          return (
+            <div key={index}>
+              <li>{item.name}</li>
+              <li>{item.price}</li>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 
