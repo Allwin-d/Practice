@@ -4,3 +4,7 @@ export type PeronProp = {
   career: string;
 };
 
+export type AuthenticationProps = {
+  isLoggedIn: boolean;
+  isAdmin: boolean;
+};
