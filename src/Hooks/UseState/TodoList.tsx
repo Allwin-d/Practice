@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+//UPDATING STATE FOR AN ARRAY
 const Todo = () => {
   const [todo, setTodo] = useState<string[]>([]);
   const [name, setName] = useState("");
@@ -10,10 +10,12 @@ const Todo = () => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim()) return; 
+    if (!name.trim()) return;
 
-    setTodo((prevTodos) => [...prevTodos, name]);
-    setName(""); 
+    setTodo((prev) => {
+      return [...prev, name]; // return a new array with previous + new item
+    });
+    setName("");
   }
 
   return (

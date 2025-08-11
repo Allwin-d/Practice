@@ -15,10 +15,13 @@ const Authentication = ({ isLoggedIn, isAdmin }: AuthenticationProps) => {
     );
   else return <p>Welcome User...</p>;
 
-  //     {isLoggedIn && isAdmin ? <div>   //this is using ternary operator
-  //     <p>Welcome Admin....</p>
-  //     <DiAndroid />
-  //   </div>: <p>Welcome User ....</p> }
+//       {isLoggedIn && isAdmin ? <div>   //this is using ternary operator
+//       <p>Welcome Admin....</p>
+//       <DiAndroid />
+//     </div>: 
+  
+//   <p>Welcome User ....</p> }
+
 };
 
 export default Authentication;

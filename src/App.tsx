@@ -1,6 +1,7 @@
 import Authentication from "./ConditionalRendering/Authentication";
 import Weather from "./ConditionalRendering/Weather";
 import Counter from "./Hooks/UseState/Counter";
+import ShoppingCart from "./Hooks/UseState/ShoppingCart";
 import Map from "./Methods/Map";
 import Person from "./Props/Person";
 
@@ -13,6 +14,7 @@ function App() {
       <Weather temperature={25} />
       <Authentication isAdmin={true} isLoggedIn={true} />
       <Counter />
+      <ShoppingCart />
     </div>
   );
 }
