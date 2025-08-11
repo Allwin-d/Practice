@@ -8,7 +8,7 @@ function App() {
     <div>
       <Map />
       <Person name="thePrimeTime" age={52} career="Youtuber" />{" "}
-      {/*-have to pass number inside curly braces //conditional rendering-*/}
+      {/*-have to pass number inside curly braces -*/}
       <Weather temperature={25} />
       <Authentication isAdmin={true} isLoggedIn={true} />
     </div>

@@ -1,10 +1,18 @@
+import { DiAndroid } from "react-icons/di";
+
 type AuthenticationProps = {
   isLoggedIn: boolean;
   isAdmin: boolean;
 };
 
 const Authentication = ({ isLoggedIn, isAdmin }: AuthenticationProps) => {
-  if (isLoggedIn && isAdmin) return <p>Welcome Admin..</p>;
+  if (isLoggedIn && isAdmin)
+    return (
+      <div>
+        <p>Welcome Admin...</p>
+        <DiAndroid />
+      </div>
+    );
   else return <p>Welcome User...</p>;
 
   return <div></div>;

@@ -11,7 +11,9 @@ const Weather = ({ temperature }: WeatherProp) => {
     return <p>Its hot Outside...</p>;
   }
 
-  return <div></div>;
+  return <div>
+    
+  </div>;
 };
 
 export default Weather;
