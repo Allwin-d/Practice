@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// Updating state for an array of objects
 type Item = {
   name: string;
   quantity: string;
@@ -8,31 +7,31 @@ type Item = {
 
 const ShoppingCart = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [productName, setProductName] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [details, setDetails] = useState<Item>({
+    name: "",
+    quantity: "",
+  });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
-    if (name === "name") {
-      setProductName(value);
-    } else if (name === "quantity") {
-      setQuantity(value);
-    }
+    // Update the details object dynamically
+    setDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!productName.trim() || !quantity.trim()) return; // avoid empty entries
+    if (!details.name.trim() || !details.quantity.trim()) return;
 
-    setItems((prev) => {
-      return [...prev, { name: productName, quantity: quantity }];
-    });
+    // Add new item to items array
+    setItems((prev) => [...prev, details]);
 
-    // Clear inputs
-    setProductName("");
-    setQuantity("");
+    // Clear details
+    setDetails({ name: "", quantity: "" });
   }
 
   return (
@@ -43,8 +42,8 @@ const ShoppingCart = () => {
           <input
             type="text"
             name="name"
-            placeholder="name"
-            value={productName}
+            placeholder="Name"
+            value={details.name}
             onChange={handleChange}
           />
         </div>
@@ -55,7 +54,7 @@ const ShoppingCart = () => {
             type="text"
             name="quantity"
             placeholder="Quantity"
-            value={quantity}
+            value={details.quantity}
             onChange={handleChange}
           />
         </div>
