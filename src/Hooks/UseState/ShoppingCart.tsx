@@ -16,10 +16,10 @@ const ShoppingCart = () => {
     const { name, value } = e.target;
 
     // Update the details object dynamically
-    setDetails((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    setDetails((prev) => {
+      return { ...prev, [name]: value };
+    });
   }
 
   function handleSubmit(e: React.FormEvent) {
