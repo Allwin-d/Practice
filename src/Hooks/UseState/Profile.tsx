@@ -16,7 +16,7 @@ const Profile = () => {
     setUser((prevUser) => {
       return {
         ...prevUser,
-        [name]: value, //here we are updating an object with the previous item
+        [name]: value, //here we are updating an object with the previous item    
       };
     });
   }
