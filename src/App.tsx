@@ -1,5 +1,6 @@
 import Authentication from "./ConditionalRendering/Authentication";
 import Weather from "./ConditionalRendering/Weather";
+import FetchDataEffect from "./Hooks/UseEffectd/FetchDataEffect";
 import Counter from "./Hooks/UseState/Counter";
 import ShoppingCart from "./Hooks/UseState/ShoppingCart";
 import Map from "./Methods/Map";
@@ -15,6 +16,7 @@ function App() {
       <Authentication isAdmin={true} isLoggedIn={true} />
       <Counter />
       <ShoppingCart />
+      <FetchDataEffect />
     </div>
   );
 }
