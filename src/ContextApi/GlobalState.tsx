@@ -1,46 +1,53 @@
-import { createContext } from "react";
+import { createContext, useState, useContext } from "react";
 
-// 1️⃣ Define the type
 type ContextType = {
   name: string;
   age: number;
   theme: string;
-  setTheme: (theme: string) => void;
+  changeTheme: () => void;
+  updateName: (newName: string) => void;
 };
 
-// 2️⃣ Define values & functions OUTSIDE the component
-let themeValue = "light";
-
-const setTheme = (theme: string) => {
-  themeValue = theme;
-  console.log("Theme updated to:", themeValue);
-};
-
-// Example constants
-const name = "Allwin";
-const age = 25;
-
-// 3️⃣ Create context with default values
-const GlobalContext = createContext<ContextType>({
-  name,
-  age,
-  theme: themeValue,
-  setTheme,
-});
+// 1️⃣ No default object — use `null` instead
+const GlobalContext = createContext<ContextType | null>(null);
 
 type Props = {
   children: React.ReactNode;
 };
 
-// 4️⃣ Provider component
+// 2️⃣ Define all values and functions inside GlobalState
 const GlobalState = ({ children }: Props) => {
+  const [name, setName] = useState("Allwin");
+  const [age] = useState(25);
+  const [theme, setTheme] = useState("light");
+
+  const changeTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const updateName = (newName: string) => {
+    setName(newName);
+  };
+
   return (
-    <GlobalContext.Provider value={{ name, age, theme: themeValue, setTheme }}>
+    <GlobalContext.Provider
+      value={{ name, age, theme, changeTheme, updateName }}
+    >
       {children}
     </GlobalContext.Provider>
   );
 };
 
-// 5️⃣ Export everything
+// 3️⃣ Safe custom hook for consuming context
+const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error(
+      "useGlobalContext must be used within a GlobalState provider"
+    );
+  }
+  return context;
+};
+
 export default GlobalState;
-export { GlobalContext, name, age, themeValue, setTheme };
+export { useGlobalContext };

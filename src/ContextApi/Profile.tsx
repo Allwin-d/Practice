@@ -1,14 +1,13 @@
-import { useContext } from "react";
-import { GlobalContext } from "./GlobalState";
+import { useGlobalContext } from "./GlobalState"; // ✅ use the safe custom hook
 
 const Profile = () => {
-  const { name, theme, setTheme } = useContext(GlobalContext);
+  const { name, theme, changeTheme } = useGlobalContext(); // ✅ correct function name
 
   return (
     <div>
       <p>{name}</p>
       <p>Theme: {theme}</p>
-      <button onClick={() => setTheme("dark")}>Switch to Dark</button>
+      <button onClick={changeTheme}>Switch Theme</button>
     </div>
   );
 };
