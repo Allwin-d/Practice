@@ -7,7 +7,7 @@ const Profile = () => {
     <div>
       <p>{name}</p>
       <p>Theme: {theme}</p>
-      <button onClick={changeTheme}>Switch Theme</button>
+      <button className="" onClick={changeTheme}>Switch Theme</button>
     </div>
   );
 };
