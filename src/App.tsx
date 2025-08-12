@@ -1,5 +1,6 @@
 import Authentication from "./ConditionalRendering/Authentication";
 import Weather from "./ConditionalRendering/Weather";
+import UpdateCareer from "./ContextApi/UpdateCareer";
 import FetchDataEffect from "./Hooks/UseEffectd/FetchDataEffect";
 import Counter from "./Hooks/UseState/Counter";
 import ShoppingCart from "./Hooks/UseState/ShoppingCart";
@@ -17,6 +18,7 @@ function App() {
       <Counter />
       <ShoppingCart />
       <FetchDataEffect />
+      <UpdateCareer />
     </div>
   );
 }
