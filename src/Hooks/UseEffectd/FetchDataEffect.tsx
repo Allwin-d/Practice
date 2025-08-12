@@ -9,7 +9,7 @@ type TotalType = {
 };
 
 const FetchDataEffect = () => {
-  const [data, setData] = useState<TotalType[]>([]); 
+  const [data, setData] = useState<TotalType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +31,21 @@ const FetchDataEffect = () => {
   return (
     <div>
       <h1>Fetched Data</h1>
-      {data.map((item) => (
-        <p key={item.id}>{item.title}</p>
-      ))}
+
+      {data && data.length > 0 ? (
+        <div>
+          {data.map((item, index) => {
+            return (
+              <div key={index}>
+                <p>{item.id}</p>
+                <h1>{item.title}</h1>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p>There is no data in here...</p>
+      )}
     </div>
   );
 };
