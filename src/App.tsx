@@ -2,6 +2,7 @@ import Authentication from "./ConditionalRendering/Authentication";
 import Weather from "./ConditionalRendering/Weather";
 import UpdateCareer from "./ContextApi/UpdateCareer";
 import FetchDataEffect from "./Hooks/UseEffectd/FetchDataEffect";
+import FocusInput from "./Hooks/UseRef/FocusInput";
 import Counter from "./Hooks/UseState/Counter";
 import ShoppingCart from "./Hooks/UseState/ShoppingCart";
 import Map from "./Methods/Map";
@@ -19,6 +20,7 @@ function App() {
       <ShoppingCart />
       <FetchDataEffect />
       <UpdateCareer />
+      <FocusInput />
     </div>
   );
 }
