@@ -10,7 +10,7 @@ export default function File() {
   }
 
   if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
+    return <p style={{ color: "red", backgroundColor: "gray" }}>{error}</p>;
   }
 
   return (
