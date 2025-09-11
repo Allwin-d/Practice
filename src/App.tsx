@@ -6,6 +6,8 @@ import ProductInfo from "./Task1/Jsx/ProductInfo";
 import UserList from "./Task1/Methods/UserList";
 import Person from "./Task1/Props/Person";
 import Product from "./Task1/Props/Product";
+import Counter from "./Task2/UseState/Counter";
+import TodoList from "./Task2/UseState/TodoList";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
       <Weather temperature={17} />
       <UserStatus loggedIn={true} isAdmin={false} />
       <GreetingCon timeOfDay="morning" />
+
+      <Counter />
+      <TodoList />
     </div>
   );
 }
