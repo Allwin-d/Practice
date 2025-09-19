@@ -1,4 +1,5 @@
 import { useState } from "react";
+//using USESTATE IN AN ARRAY OF OBJECTS
 
 type Person = {
   name: string;
@@ -15,7 +16,6 @@ const Profile = () => {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-
     setItems((prev) => {
       return {
         ...prev,
