@@ -9,8 +9,9 @@
 // import ParentPerson from "./components/props/ParentPerson";
 // import ArrayOfObj from "./components/ArrayOfObj";
 // import Counter from "./components/UseState/Counter";
+// import TodoList from "./components/UseState/TodoList";
 
-import TodoList from "./components/UseState/TodoList";
+import Profiles from "./components/UseState/Profiles";
 
 const App = () => {
   return (
@@ -26,7 +27,8 @@ const App = () => {
       <UserStatus loggedIn={true} isAdmin={true} />
       <Greetings timeOfDay = "Morning"/> */}
       {/* <Counter /> */}
-      <TodoList />
+      {/* <TodoList /> */}
+      <Profiles />
     </div>
   );
 };

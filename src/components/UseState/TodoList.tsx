@@ -4,6 +4,8 @@ const TodoList = () => {
   const [todo, setTodo] = useState<string[]>([]);
   const [item, setItem] = useState<string>("");
 
+
+  //useState example for modifying an array 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setItem(e.target.value);
   }
