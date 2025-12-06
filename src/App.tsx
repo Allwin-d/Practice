@@ -14,7 +14,9 @@
 // import ShoppingList from "./components/UseState/ShoppingList";
 // import CounterEffect from "./components/UseEffect/CounterEffect";
 
-import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
+import ChildComponent from "./components/UseContext/ChildComponent";
+import UserContextProvider from "./components/UseContext/UserContext";
+// import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
 
 const App = () => {
   return (
@@ -34,7 +36,10 @@ const App = () => {
       {/* <Profiles /> */}
       {/* <ShoppingList /> */}
       {/* <CounterEffect /> */}
-      <FetchDataEffect />
+      <UserContextProvider>
+        {/* <FetchDataEffect /> */}
+        <ChildComponent/>
+      </UserContextProvider>
     </div>
   );
 };
