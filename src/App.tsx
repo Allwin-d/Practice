@@ -8,8 +8,9 @@
 // import Weather from "./components/ConditionalRendering/Weather";
 // import ParentPerson from "./components/props/ParentPerson";
 // import ArrayOfObj from "./components/ArrayOfObj";
+// import Counter from "./components/UseState/Counter";
 
-import Counter from "./components/UseState/Counter";
+import TodoList from "./components/UseState/TodoList";
 
 const App = () => {
   return (
@@ -24,7 +25,8 @@ const App = () => {
       {/* <Weather temperature={25} />
       <UserStatus loggedIn={true} isAdmin={true} />
       <Greetings timeOfDay = "Morning"/> */}
-      <Counter />
+      {/* <Counter /> */}
+      <TodoList />
     </div>
   );
 };
