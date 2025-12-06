@@ -9,7 +9,7 @@ const Weather = ({ temperature }: WeatherProps) => {
   } else if (temperature >= 15 && temperature <= 25) {
     return <h2>It's nice outside</h2>;
   } else {
-    return <h2>It's cold outside</h2>;
+    return <h2 >It's cold outside</h2>;
   }
 };
 

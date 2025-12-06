@@ -3,14 +3,13 @@
 // import MainContent from "./components/MainContent";
 // import Greeting from "./components/Greeting";
 // import ProductInfo from "./components/ProductInfo";
-
-import Greetings from "./components/ConditionalRendering/Greetings";
-import UserStatus from "./components/ConditionalRendering/UserStatus";
-import Weather from "./components/ConditionalRendering/Weather";
-
+// import Greetings from "./components/ConditionalRendering/Greetings";
+// import UserStatus from "./components/ConditionalRendering/UserStatus";
+// import Weather from "./components/ConditionalRendering/Weather";
 // import ParentPerson from "./components/props/ParentPerson";
-
 // import ArrayOfObj from "./components/ArrayOfObj";
+
+import Counter from "./components/UseState/Counter";
 
 const App = () => {
   return (
@@ -22,9 +21,10 @@ const App = () => {
       <ProductInfo /> */}
       {/* <ArrayOfObj /> */}
       {/* <ParentPerson /> */}
-      <Weather temperature={25} />
+      {/* <Weather temperature={25} />
       <UserStatus loggedIn={true} isAdmin={true} />
-      <Greetings timeOfDay = "Morning"/>
+      <Greetings timeOfDay = "Morning"/> */}
+      <Counter />
     </div>
   );
 };
