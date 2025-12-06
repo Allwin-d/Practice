@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const CounterEffect = () => {
   const [count, setCount] = useState(0);
 
+  //this useEffect runs whenever the count value changes 
   useEffect(() => {
     async function handleCount() {
       document.title = String(count);
