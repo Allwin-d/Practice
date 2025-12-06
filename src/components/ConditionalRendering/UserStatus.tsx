@@ -3,7 +3,7 @@ type uStatusProp = {
   isAdmin: boolean;
 };
 
-//conditional rendering using &&
+//conditional rendering using && operator
 const UserStatus = ({ loggedIn, isAdmin }: uStatusProp) => {
   return (
     <div>
