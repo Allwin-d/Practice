@@ -4,7 +4,9 @@
 // import Greeting from "./components/Greeting";
 // import ProductInfo from "./components/ProductInfo";
 
-import ParentPerson from "./components/props/ParentPerson";
+import Weather from "./components/ConditionalRendering/Weather";
+
+// import ParentPerson from "./components/props/ParentPerson";
 
 // import ArrayOfObj from "./components/ArrayOfObj";
 
@@ -17,7 +19,8 @@ const App = () => {
       {/* <Greeting />
       <ProductInfo /> */}
       {/* <ArrayOfObj /> */}
-      <ParentPerson />
+      {/* <ParentPerson /> */}
+      <Weather temperature ={25} />
     </div>
   );
 };
