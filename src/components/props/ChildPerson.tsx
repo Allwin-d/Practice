@@ -5,7 +5,7 @@ type childProp = {
   hobbies: string[];
 };
 
-const ChildPerson = ({ name, age, isMarried, hobbies }: childProp) => {
+const ChildPerson = ({ name, age, isMarried, hobbies }: childProp) => { //we are destructuring in this line 
   return (
     <div>
       <p>Name : {name}</p>
