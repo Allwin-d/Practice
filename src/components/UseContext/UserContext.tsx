@@ -8,13 +8,14 @@ type UserContextType = {
   isMarried: boolean;
 };
 
-export const GlobalContext = createContext<UserContextType | null>(null);
+export const GlobalContext = createContext<UserContextType | null>(null); //we should always createcontext outside of the function
 
 type ChildrenProp = {
   children: ReactNode;
 };
 
 const UserContextProvider = ({ children }: ChildrenProp) => {
+  //this is the function that we wrap in the app component
   const name = "Allwin";
   const age = 24;
   const isMarried = false;
