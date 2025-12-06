@@ -60,6 +60,7 @@ const Profiles = () => {
     const updated = profile.map((item) =>
       item.id === val.id ? { ...item, name: "Jesus" } : item
     );
+    console.log("Updated variable values : ", updated);
     setProfile(updated);
   }
 

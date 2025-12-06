@@ -10,8 +10,9 @@
 // import ArrayOfObj from "./components/ArrayOfObj";
 // import Counter from "./components/UseState/Counter";
 // import TodoList from "./components/UseState/TodoList";
+// import Profiles from "./components/UseState/Profiles";
 
-import Profiles from "./components/UseState/Profiles";
+import ShoppingList from "./components/UseState/ShoppingList";
 
 const App = () => {
   return (
@@ -28,7 +29,8 @@ const App = () => {
       <Greetings timeOfDay = "Morning"/> */}
       {/* <Counter /> */}
       {/* <TodoList /> */}
-      <Profiles />
+      {/* <Profiles /> */}
+      <ShoppingList />
     </div>
   );
 };
