@@ -13,9 +13,9 @@ const ProductInfo = () => {
 
   return (
     <div>
-      <p>{product.name}</p>
-      <p>{product.price}</p>
-      <p>{product.availability}</p>
+      <p>Name : {product.name}</p>
+      <p>Price : {product.price}</p>
+      <p>Availability : {product.availability}</p>
     </div>
   );
 };
