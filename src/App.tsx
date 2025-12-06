@@ -13,10 +13,11 @@
 // import Profiles from "./components/UseState/Profiles";
 // import ShoppingList from "./components/UseState/ShoppingList";
 // import CounterEffect from "./components/UseEffect/CounterEffect";
-
-import ChildComponent from "./components/UseContext/ChildComponent";
-import UserContextProvider from "./components/UseContext/UserContext";
+// import ChildComponent from "./components/UseContext/ChildComponent";
+// import UserContextProvider from "./components/UseContext/UserContext";
 // import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
+
+import CounterReducer from "./components/UseReducer/CounterReducer";
 
 const App = () => {
   return (
@@ -36,10 +37,11 @@ const App = () => {
       {/* <Profiles /> */}
       {/* <ShoppingList /> */}
       {/* <CounterEffect /> */}
-      <UserContextProvider>
-        {/* <FetchDataEffect /> */}
-        <ChildComponent/>
-      </UserContextProvider>
+      {/* <UserContextProvider> */}
+      {/* <FetchDataEffect /> */}
+      {/* <ChildComponent/>
+      </UserContextProvider> */}
+      <CounterReducer />
     </div>
   );
 };
