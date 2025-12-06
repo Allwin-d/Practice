@@ -21,8 +21,8 @@ const App = () => {
       <ProductInfo /> */}
       {/* <ArrayOfObj /> */}
       {/* <ParentPerson /> */}
-      <Weather temperature ={25} />
-      <UserStatus loggedIn ={true} isAdmin={true} />
+      <Weather temperature={25} />
+      <UserStatus loggedIn={true} isAdmin={true} />
     </div>
   );
 };
