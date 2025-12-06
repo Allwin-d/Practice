@@ -4,6 +4,7 @@
 // import Greeting from "./components/Greeting";
 // import ProductInfo from "./components/ProductInfo";
 
+import Greetings from "./components/ConditionalRendering/Greetings";
 import UserStatus from "./components/ConditionalRendering/UserStatus";
 import Weather from "./components/ConditionalRendering/Weather";
 
@@ -23,6 +24,7 @@ const App = () => {
       {/* <ParentPerson /> */}
       <Weather temperature={25} />
       <UserStatus loggedIn={true} isAdmin={true} />
+      <Greetings timeOfDay = "Morning"/>
     </div>
   );
 };

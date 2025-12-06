@@ -2,6 +2,7 @@ type WeatherProps = {
   temperature: number;
 };
 
+//conditional rendering based on if else conditions 
 const Weather = ({ temperature }: WeatherProps) => {
   if (temperature > 25) {
     return <h2>It's hot outside</h2>;
