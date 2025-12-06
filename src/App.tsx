@@ -4,7 +4,9 @@
 // import Greeting from "./components/Greeting";
 // import ProductInfo from "./components/ProductInfo";
 
-import ArrayOfObj from "./components/ArrayOfObj";
+import ParentPerson from "./components/props/ParentPerson";
+
+// import ArrayOfObj from "./components/ArrayOfObj";
 
 const App = () => {
   return (
@@ -14,7 +16,8 @@ const App = () => {
       <Footer /> */}
       {/* <Greeting />
       <ProductInfo /> */}
-      <ArrayOfObj />
+      {/* <ArrayOfObj /> */}
+      <ParentPerson />
     </div>
   );
 };
