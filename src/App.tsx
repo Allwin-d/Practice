@@ -11,8 +11,10 @@
 // import Counter from "./components/UseState/Counter";
 // import TodoList from "./components/UseState/TodoList";
 // import Profiles from "./components/UseState/Profiles";
+// import ShoppingList from "./components/UseState/ShoppingList";
+// import CounterEffect from "./components/UseEffect/CounterEffect";
 
-import ShoppingList from "./components/UseState/ShoppingList";
+import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
 
 const App = () => {
   return (
@@ -30,7 +32,9 @@ const App = () => {
       {/* <Counter /> */}
       {/* <TodoList /> */}
       {/* <Profiles /> */}
-      <ShoppingList />
+      {/* <ShoppingList /> */}
+      {/* <CounterEffect /> */}
+      <FetchDataEffect />
     </div>
   );
 };
