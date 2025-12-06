@@ -56,6 +56,11 @@ const ShoppingList = () => {
 
       {/* ✅ Display List */}
       <ul>
+        {items.length > 0 ? (
+          <span>Currently you have {items.length} items in the bucket</span>
+        ) : (
+          <span>the Cart is empty</span>
+        )}
         {items.map((item, index) => (
           <li key={index}>
             {item.name} - {item.quantity}
