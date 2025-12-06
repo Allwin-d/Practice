@@ -15,10 +15,10 @@ const ShoppingList = () => {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
-    setProd((prev) => ({
-      ...prev,
+    setProd({
+      ...prod,
       [name]: value,
-    }));
+    });
   }
 
   function handleSubmit(e: React.FormEvent) {
