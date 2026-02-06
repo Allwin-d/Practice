@@ -17,7 +17,9 @@
 // import UserContextProvider from "./components/UseContext/UserContext";
 // import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
 
-import CounterReducer from "./components/UseReducer/CounterReducer";
+import Todo from "./components/Todo/Todo";
+
+// import CounterReducer from "./components/UseReducer/CounterReducer";
 
 const App = () => {
   return (
@@ -41,7 +43,8 @@ const App = () => {
       {/* <FetchDataEffect /> */}
       {/* <ChildComponent/>
       </UserContextProvider> */}
-      <CounterReducer />
+      {/* <CounterReducer /> */}
+      <Todo />
     </div>
   );
 };
