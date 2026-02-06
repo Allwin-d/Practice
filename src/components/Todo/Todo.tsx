@@ -27,6 +27,15 @@ const Todo = () => {
 
   const API_URL = "https://dummyjson.com/todos";
 
+  const handleSubmit = async (val: Item) => {
+    try {
+      const response = await axios.post("https://dummyjson.com/todos/add", val);
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const fetchTodoData = async () => {
       try {
@@ -97,6 +106,8 @@ const Todo = () => {
           setNewItem({ ...newItem, userId: Number(e.target.value) })
         }
       />
+
+      <button onClick={() => handleSubmit(newItem)}>Submit</button>
     </div>
   );
 };
