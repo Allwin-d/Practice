@@ -16,8 +16,9 @@
 // import ChildComponent from "./components/UseContext/ChildComponent";
 // import UserContextProvider from "./components/UseContext/UserContext";
 // import FetchDataEffect from "./components/UseEffect/FetchDataEffect";
+// import Todo from "./components/Todo/Todo";
 
-import Todo from "./components/Todo/Todo";
+import Crud from "./components/UseMutation/Crud";
 
 // import CounterReducer from "./components/UseReducer/CounterReducer";
 
@@ -44,7 +45,8 @@ const App = () => {
       {/* <ChildComponent/>
       </UserContextProvider> */}
       {/* <CounterReducer /> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Crud />
     </div>
   );
 };
