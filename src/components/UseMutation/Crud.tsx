@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 
@@ -9,18 +9,21 @@ type Product = {
 };
 
 const Crud = () => {
-  const API_URL = "https://api.restful-api.dev/objects";
-  const [newProd, setNewProd] = useState({
+  const API_URL = "/api/objects"; // ✅ Use the Vite proxy
+
+  const [newProd, setNewProd] = useState<Product>({
     id: "",
     name: "",
     data: {},
   });
-  //   const queryClient =
 
+  const queryClient = useQueryClient();
+
+  // Fetch products
   const fetchProducts = async (): Promise<Product[]> => {
     const response = await axios.get<Product[]>(API_URL);
-    console.log("Data from Crud : ", response.data);
-    return response.data; // return actual data only
+    console.log("Data from Crud:", response.data);
+    return response.data;
   };
 
   const { data, isError, isLoading } = useQuery({
@@ -28,67 +31,74 @@ const Crud = () => {
     queryFn: fetchProducts,
   });
 
-  //   const addNewProduct =()=>{
+  // Add product mutation
+  const addProductMutation = useMutation({
+    mutationFn: async (prod: Product) => {
+      const response = await axios.post(API_URL, prod, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
 
-  //   }
-
-  //   const addProduct = useMutation({
-  //     mutationFn : addNewProduct,
-  //     onSuccess :
-  //   })
-
-  console.log("The New Item Value : ", newProd);
-
-  if (isError) {
-    return <p>Failed to fetch Data</p>;
-  }
-
-  if (isLoading) {
-    return <p>Loading Data ...</p>;
-  }
+  if (isError) return <p>Failed to fetch data</p>;
+  if (isLoading) return <p>Loading data...</p>;
 
   return (
     <div>
-      <p>Helooooooooooooooooo</p>
-
+      <h2>Products</h2>
       {data?.map((item) => (
-        <div key={item.id}>
-          <p>{item.id}</p>
+        <div key={item.id} className="mb-2">
+          <p>ID: {item.id}</p>
+          <p>Name: {item.name}</p>
+          <pre>{JSON.stringify(item.data, null, 2)}</pre>
           <hr />
-          <p>{item.name}</p>
         </div>
       ))}
-      <div className="flex flex-row space-x-4">
-        <p>Id: </p>
-        <input
-          type="number"
-          value={newProd.id}
-          onChange={(e) =>
-            setNewProd({ ...newProd, id: String(e.target.value) })
-          }
-        />
-      </div>
 
-      <div className="flex flex-row space-x-4">
-        <p>Name : </p>
-        <input
-          type="text"
-          value={newProd.name}
-          onChange={(e) =>
-            setNewProd({ ...newProd, name: String(e.target.value) })
-          }
-        ></input>
-      </div>
+      <div className="flex flex-col gap-2 mt-4">
+        <div className="flex gap-2 items-center">
+          <label>ID:</label>
+          <input
+            type="text"
+            value={newProd.id}
+            onChange={(e) => setNewProd({ ...newProd, id: e.target.value })}
+          />
+        </div>
 
-      <div className="flex flex-row space-x-4">
-        <p>Data : </p>
-        <input
-          type="text"
-          value={JSON.stringify(newProd.data)}
-          onChange={(e) =>
-            setNewProd({ ...newProd, data: { value: e.target.value } })
-          }
-        />
+        <div className="flex gap-2 items-center">
+          <label>Name:</label>
+          <input
+            type="text"
+            value={newProd.name}
+            onChange={(e) => setNewProd({ ...newProd, name: e.target.value })}
+          />
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <label>Data (JSON):</label>
+          <input
+            type="text"
+            value={JSON.stringify(newProd.data)}
+            onChange={(e) => {
+              try {
+                setNewProd({ ...newProd, data: JSON.parse(e.target.value) });
+              } catch {
+                // invalid JSON, ignore or handle
+              }
+            }}
+          />
+        </div>
+
+        <button
+          onClick={() => addProductMutation.mutate(newProd)}
+          className="mt-2 p-2 bg-blue-500 text-white rounded"
+        >
+          Add Product
+        </button>
       </div>
     </div>
   );
