@@ -63,6 +63,18 @@ const Crud = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
+  const deleteuser = async (id: number): Promise<void> => {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to Delete User");
+  };
+
+  const DeleteUser = useMutation({
+    mutationFn: deleteuser,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
+
   if (isError) {
     return (
       <div className="flex items-center justify-center text-red-600 text-4xl">
@@ -81,11 +93,27 @@ const Crud = () => {
 
   return (
     <div>
-      {data && data.length > 0 ? (
-        data.map((item) => <p key={item.id}>{item.name}</p>)
-      ) : (
-        <p>There is No Data Here ..</p>
-      )}
+      <div className="grid grid-cols-4 gap-5 ">
+        {data && data.length > 0 ? (
+          data.map((item) => (
+            <div key={item.id}>
+              <p>{item.name}</p>
+              <p>{item.email}</p>
+              <p>{item.phone}</p>
+              <p>{item.address}</p>
+              <p>{item.role}</p>
+              <button
+                className="bg-red-700 text-white text-xl"
+                onClick={() => DeleteUser.mutate(item.id!)}
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>There is No Data Here ..</p>
+        )}
+      </div>
       <div className="flex flex-row space-x-3">
         <p>Name : </p>
         <input
