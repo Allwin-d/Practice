@@ -47,7 +47,7 @@ const Crud = () => {
     }
   };
 
-  const AddUser = useMutation({
+  const AddUserMutation = useMutation({
     mutationFn: addUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -63,7 +63,7 @@ const Crud = () => {
     }
   };
 
-  const DeleteUser = useMutation({
+  const DeleteUserMutation = useMutation({
     mutationFn: deleteuser,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
@@ -98,7 +98,7 @@ const Crud = () => {
               <div className="space-x-3">
                 <button
                   className="bg-red-700 text-white text-xl p-2 rounded-md"
-                  onClick={() => DeleteUser.mutate(item.id!)}
+                  onClick={() => DeleteUserMutation.mutate(item.id!)}
                 >
                   Delete
                 </button>
@@ -176,7 +176,10 @@ const Crud = () => {
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
         ></input>
       </div>
-      <button className="cursor-pointer" onClick={() => AddUser.mutate(user)}>
+      <button
+        className="cursor-pointer"
+        onClick={() => AddUserMutation.mutate(user)}
+      >
         Add User
       </button>
     </div>
