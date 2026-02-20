@@ -36,38 +36,31 @@ const Crud = () => {
   });
 
   console.log("UsersData: ", data);
-  const adduser = async (user: userInter): Promise<userInter> => {
+
+  const addUser = async (user: userInter): Promise<userInter> => {
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add user");
-      }
-
-      const data: userInter = await response.json(); // ✅ await added
-      return data;
-    } catch (err) {
-      console.error("Failed to Add new User:", err);
-      throw err; // ✅ important for useMutation / proper typing
+      const response = await axios.post<userInter>(API_URL, user);
+      return response.data;
+    } catch (error) {
+      console.error("Failed to add user:", error);
+      throw error;
     }
   };
 
   const AddUser = useMutation({
-    mutationFn: adduser,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+    mutationFn: addUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
   });
 
   const deleteuser = async (id: number): Promise<void> => {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) throw new Error("Failed to Delete User");
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+    } catch (err) {
+      console.error("Failed to Delete User ", err);
+      throw err;
+    }
   };
 
   const DeleteUser = useMutation({
@@ -102,12 +95,17 @@ const Crud = () => {
               <p>{item.phone}</p>
               <p>{item.address}</p>
               <p>{item.role}</p>
-              <button
-                className="bg-red-700 text-white text-xl"
-                onClick={() => DeleteUser.mutate(item.id!)}
-              >
-                Delete
-              </button>
+              <div className="space-x-3">
+                <button
+                  className="bg-red-700 text-white text-xl p-2 rounded-md"
+                  onClick={() => DeleteUser.mutate(item.id!)}
+                >
+                  Delete
+                </button>
+                <button className="bg-blue-700 text-white text-xl p-2 rounded-md">
+                  Update
+                </button>
+              </div>
             </div>
           ))
         ) : (
