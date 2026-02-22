@@ -36,22 +36,22 @@ const Crud = () => {
   // ---------------- ADD USER ----------------
 
   //This is using fetch (here we use the method , headers , and body)
-//   const addUser = async (user: userInter): Promise<userInter> => {
-//   const response = await fetch(API_URL, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(user),
-//   });
+  //   const addUser = async (user: userInter): Promise<userInter> => {
+  //   const response = await fetch(API_URL, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(user),
+  //   });
 
-//   if (!response.ok) {
-//     throw new Error("Failed to add user");
-//   }
+  //   if (!response.ok) {
+  //     throw new Error("Failed to add user");
+  //   }
 
-//   const data = await response.json();
-//   return data;
-// };
+  //   const data = await response.json();
+  //   return data;
+  // };
 
   const addUser = async (user: userInter): Promise<userInter> => {
     const response = await axios.post<userInter>(API_URL, user);
@@ -73,8 +73,7 @@ const Crud = () => {
 
   const DeleteUserMutation = useMutation({
     mutationFn: deleteUser,
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["users"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
   // ---------------- UPDATE USER ----------------
@@ -85,6 +84,7 @@ const Crud = () => {
     id: number;
     user: userInter;
   }): Promise<userInter> => {
+    console.log(`The updated user details : id : ${id} , user det : ${user}`);
     const response = await axios.put(`${API_URL}/${id}`, user);
     return response.data;
   };
@@ -137,11 +137,21 @@ const Crud = () => {
         {data && data.length > 0 ? (
           data.map((item) => (
             <div key={item.id} className="border p-4 rounded-md shadow-md">
-              <p><strong>Name:</strong> {item.name}</p>
-              <p><strong>Email:</strong> {item.email}</p>
-              <p><strong>Phone:</strong> {item.phone}</p>
-              <p><strong>Address:</strong> {item.address}</p>
-              <p><strong>Role:</strong> {item.role}</p>
+              <p>
+                <strong>Name:</strong> {item.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {item.email}
+              </p>
+              <p>
+                <strong>Phone:</strong> {item.phone}
+              </p>
+              <p>
+                <strong>Address:</strong> {item.address}
+              </p>
+              <p>
+                <strong>Role:</strong> {item.role}
+              </p>
 
               <div className="space-x-3 mt-3">
                 <button
