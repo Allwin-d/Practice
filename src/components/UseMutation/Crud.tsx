@@ -34,6 +34,25 @@ const Crud = () => {
   });
 
   // ---------------- ADD USER ----------------
+
+  //This is using fetch (here we use the method , headers , and body)
+//   const addUser = async (user: userInter): Promise<userInter> => {
+//   const response = await fetch(API_URL, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(user),
+//   });
+
+//   if (!response.ok) {
+//     throw new Error("Failed to add user");
+//   }
+
+//   const data = await response.json();
+//   return data;
+// };
+
   const addUser = async (user: userInter): Promise<userInter> => {
     const response = await axios.post<userInter>(API_URL, user);
     return response.data;
