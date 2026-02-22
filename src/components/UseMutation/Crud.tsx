@@ -6,6 +6,8 @@ import { useState } from "react";
 const API_URL = "https://6996cbd27d1786436575503c.mockapi.io/users";
 
 const Crud = () => {
+  const queryClient = useQueryClient();
+
   const [user, setUser] = useState<userInter>({
     name: "",
     address: "",
@@ -18,16 +20,12 @@ const Crud = () => {
     userName: "",
   });
 
-  const queryClient = useQueryClient();
+  const [editUserId, setEditUserId] = useState<number | null>(null);
 
+  // ---------------- FETCH USERS ----------------
   const fetchUsers = async (): Promise<userInter[]> => {
-    try {
-      const response = await axios.get<userInter[]>(API_URL);
-      return response.data;
-    } catch (err) {
-      console.error("Failed to fetch Data : ", err);
-      throw err;
-    }
+    const response = await axios.get<userInter[]>(API_URL);
+    return response.data;
   };
 
   const { data, isError, isLoading } = useQuery({
@@ -35,43 +33,72 @@ const Crud = () => {
     queryFn: fetchUsers,
   });
 
-  console.log("UsersData: ", data);
-
+  // ---------------- ADD USER ----------------
   const addUser = async (user: userInter): Promise<userInter> => {
-    try {
-      const response = await axios.post<userInter>(API_URL, user);
-      return response.data;
-    } catch (error) {
-      console.error("Failed to add user:", error);
-      throw error;
-    }
+    const response = await axios.post<userInter>(API_URL, user);
+    return response.data;
   };
 
   const AddUserMutation = useMutation({
     mutationFn: addUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      resetForm();
     },
   });
 
-  const deleteuser = async (id: number): Promise<void> => {
-    try {
-      await axios.delete(`${API_URL}/${id}`);
-    } catch (err) {
-      console.error("Failed to Delete User ", err);
-      throw err;
-    }
+  // ---------------- DELETE USER ----------------
+  const deleteUser = async (id: number): Promise<void> => {
+    await axios.delete(`${API_URL}/${id}`);
   };
 
   const DeleteUserMutation = useMutation({
-    mutationFn: deleteuser,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+    mutationFn: deleteUser,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
+  // ---------------- UPDATE USER ----------------
+  const updateUser = async ({
+    id,
+    user,
+  }: {
+    id: number;
+    user: userInter;
+  }): Promise<userInter> => {
+    const response = await axios.put(`${API_URL}/${id}`, user);
+    return response.data;
+  };
+
+  const UpdateUserMutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      setEditUserId(null);
+      resetForm();
+    },
+  });
+
+  // ---------------- RESET FORM ----------------
+  const resetForm = () => {
+    setUser({
+      name: "",
+      address: "",
+      email: "",
+      password: "",
+      phone: "",
+      role: "",
+      status: "",
+      avatarUrl: "",
+      userName: "",
+    });
+  };
+
+  // ---------------- LOADING & ERROR ----------------
   if (isError) {
     return (
       <div className="flex items-center justify-center text-red-600 text-4xl">
-        <p>Failed to fetch Data...</p>
+        Failed to fetch Data...
       </div>
     );
   }
@@ -79,109 +106,131 @@ const Crud = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center text-blue-600 text-4xl">
-        <p>Loading Data ...</p>
+        Loading Data ...
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-4 gap-5 ">
+    <div className="p-6">
+      {/* ---------------- USERS LIST ---------------- */}
+      <div className="grid grid-cols-4 gap-5 mb-10">
         {data && data.length > 0 ? (
           data.map((item) => (
-            <div key={item.id}>
-              <p>{item.name}</p>
-              <p>{item.email}</p>
-              <p>{item.phone}</p>
-              <p>{item.address}</p>
-              <p>{item.role}</p>
-              <div className="space-x-3">
+            <div key={item.id} className="border p-4 rounded-md shadow-md">
+              <p><strong>Name:</strong> {item.name}</p>
+              <p><strong>Email:</strong> {item.email}</p>
+              <p><strong>Phone:</strong> {item.phone}</p>
+              <p><strong>Address:</strong> {item.address}</p>
+              <p><strong>Role:</strong> {item.role}</p>
+
+              <div className="space-x-3 mt-3">
                 <button
-                  className="bg-red-700 text-white text-xl p-2 rounded-md"
+                  className="bg-red-600 text-white px-3 py-1 rounded"
                   onClick={() => DeleteUserMutation.mutate(item.id!)}
                 >
                   Delete
                 </button>
-                <button className="bg-blue-700 text-white text-xl p-2 rounded-md">
-                  Update
+
+                <button
+                  className="bg-blue-600 text-white px-3 py-1 rounded"
+                  onClick={() => {
+                    setEditUserId(item.id!);
+                    setUser(item); // fill form for editing
+                  }}
+                >
+                  Edit
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <p>There is No Data Here ..</p>
+          <p>No Data Found</p>
         )}
       </div>
-      <div className="flex flex-row space-x-3">
-        <p>Name : </p>
+
+      {/* ---------------- FORM ---------------- */}
+      <div className="space-y-3 max-w-md">
         <input
           type="text"
+          placeholder="Name"
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
-        ></input>
-      </div>
-      <div className="flex flex-row space-x-3">
-        <p>UserName : </p>
+          className="border p-2 w-full"
+        />
+
         <input
           type="text"
+          placeholder="Username"
           value={user.userName}
           onChange={(e) => setUser({ ...user, userName: e.target.value })}
-        ></input>
-      </div>
-      <div>
-        <p>Address: </p>
+          className="border p-2 w-full"
+        />
+
         <input
           type="text"
+          placeholder="Address"
           value={user.address}
           onChange={(e) => setUser({ ...user, address: e.target.value })}
-        ></input>
-      </div>
-      <div>
-        <p>Email: </p>
+          className="border p-2 w-full"
+        />
+
         <input
           type="email"
+          placeholder="Email"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
-        ></input>
-      </div>
-      <div>
-        <p>password :</p>
+          className="border p-2 w-full"
+        />
+
         <input
           type="password"
+          placeholder="Password"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
-        ></input>
-      </div>
-      <div>
-        <p>Status : </p>
+          className="border p-2 w-full"
+        />
+
         <input
           type="text"
-          value={user.status}
-          onChange={(e) => setUser({ ...user, status: e.target.value })}
-        ></input>
-      </div>
-      <div>
-        <p>Role : </p>
-        <input
-          type="text"
-          value={user.role}
-          onChange={(e) => setUser({ ...user, role: e.target.value })}
-        ></input>
-      </div>
-      <div className="flex flex-row space-x-4">
-        <p>phone : </p>
-        <input
-          type="number"
+          placeholder="Phone"
           value={user.phone}
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
-        ></input>
+          className="border p-2 w-full"
+        />
+
+        <input
+          type="text"
+          placeholder="Status"
+          value={user.status}
+          onChange={(e) => setUser({ ...user, status: e.target.value })}
+          className="border p-2 w-full"
+        />
+
+        <input
+          type="text"
+          placeholder="Role"
+          value={user.role}
+          onChange={(e) => setUser({ ...user, role: e.target.value })}
+          className="border p-2 w-full"
+        />
+
+        <button
+          className="bg-green-600 text-white px-4 py-2 rounded w-full"
+          onClick={() => {
+            if (editUserId) {
+              UpdateUserMutation.mutate({
+                id: editUserId,
+                user: user,
+              });
+            } else {
+              AddUserMutation.mutate(user);
+            }
+          }}
+        >
+          {editUserId ? "Update User" : "Add User"}
+        </button>
       </div>
-      <button
-        className="cursor-pointer"
-        onClick={() => AddUserMutation.mutate(user)}
-      >
-        Add User
-      </button>
     </div>
   );
 };
