@@ -8,6 +8,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 const Crud = () => {
   const queryClient = useQueryClient();
 
+  type UpdateType = {
+    id: number;
+    user: userInter;
+  };
+
   const [user, setUser] = useState<userInter>({
     name: "",
     address: "",
@@ -77,15 +82,9 @@ const Crud = () => {
   });
 
   // ---------------- UPDATE USER ----------------
-  const updateUser = async ({
-    id,
-    user,
-  }: {
-    id: number;
-    user: userInter;
-  }): Promise<userInter> => {
+  const updateUser = async ({ id, user }: UpdateType): Promise<userInter> => {
     console.log(`The updated user details : id : ${id} , user det : ${user}`);
-    const response = await axios.put(`${API_URL}/${id}`, user);
+    const response = await axios.put(`${API_URL}/${id}`, user); 
     return response.data;
   };
 
