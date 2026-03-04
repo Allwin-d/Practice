@@ -3,7 +3,7 @@ import type { userInter } from "./Types";
 import axios from "axios";
 import { useState } from "react";
 
-const API_URL = "https://6996cbd27d1786436575503c.mockapi.io/users";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Crud = () => {
   const queryClient = useQueryClient();
